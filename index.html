@@ -10,3 +10,28 @@
 <script>commentBox('5731362493431808-proj')</script>
 
 </body>
+<script>
+// Recursive function to traverse the DOM tree
+function traverseDOM(node) {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent.startsWith("Hi")) {
+        // Create a new paragraph element, set its text content, and append it to the body
+        var p = document.createElement("p");
+        p.textContent = node.textContent;
+        document.body.appendChild(p);
+    } else {
+        // Recursively call traverseDOM on each child node
+        for (var i = 0; i < node.childNodes.length; i++) {
+            traverseDOM(node.childNodes[i]);
+        }
+    }
+}
+
+// Function to be called on click
+function handleClick() {
+    // Call the function on the document body to start the traversal
+    traverseDOM(document.body);
+}
+
+// Add the event listener to the whole document
+document.addEventListener('click', handleClick);
+</script>
